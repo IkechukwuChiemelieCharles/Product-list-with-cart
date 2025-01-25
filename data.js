@@ -135,6 +135,7 @@ const container = document.querySelector(".container");
 const cont1 = document.querySelector(".cont1");
 const cartlist = document.querySelector(".cartlist");
 const cartnum = document.querySelector(".cartnum");
+const empty = document.querySelector(".empty");
 
 // addCont.addEventListener("click", function () {
 //   "clcik";
@@ -161,15 +162,13 @@ function inner() {
       //added a dataset  to  foodCont
       // foodCont.dataset.id = prod.id;
 
+      const foodImg = document.createElement("img");
+      foodImg.classList.add("foodImg");
+      foodImg.src = prod.image.mobile;
       // added html to food cont
       foodCont.innerHTML = `
-            <div class="imgCont">
-               <img
-                class="foodImg"
-                src="${prod.image.mobile}"
-                alt=""
-              /> 
-            </div>
+           
+            
             <div class="cartXadd">
               <div class="cartCont cartadder">
                 <img class="cartadder" src="${prod.addToCartImg}" alt="" />
@@ -203,7 +202,7 @@ function inner() {
               <span>${prod.price} </span>
             </div>
           `;
-
+      foodCont.prepend(foodImg);
       // console.log(foodCont);
 
       cont1.appendChild(foodCont);
@@ -223,6 +222,7 @@ function inner() {
 
           cartCont[i].classList.add("hide");
           addCont[i].classList.remove("hide");
+          foodImg.classList.toggle("border");
         }
         if (positionClick.classList.contains("addCont")) {
           //added event listener to incr to display cart cont
@@ -236,6 +236,7 @@ function inner() {
 
           addtocart(productId);
           addCartToHtml();
+          empty.classList.add("hide");
         }
       });
     });
@@ -286,7 +287,7 @@ function addCartToHtml() {
       let info = prodList[positionProduct];
       console.log(info);
 
-      newList.innerHTML = ` <div class="list">
+      newList.innerHTML = ` 
           <div class="left">
             <h5 class="cartFoodName">${info.name}</h5>
             <div class="lower">
@@ -298,7 +299,7 @@ function addCartToHtml() {
           <div class="removeImg">
             <img src="./assets/images/icon-remove-item.svg" alt="" />
           </div>
-        </div>`;
+        `;
 
       cartlist.appendChild(newList);
       cartnum.textContent = totalQty;
@@ -320,6 +321,10 @@ function api() {
         carts = JSON.parse(localStorage.getItem("cart"));
         addCartToHtml();
       }
+      if (localStorage.getItem("cart")) {
+        empty.classList.add("hide");
+      }
+      // localStorage.clear();
     });
 }
 api();
