@@ -1,136 +1,3 @@
-// const cartCont = document.querySelectorAll(".cartCont");
-// const addCont = document.querySelectorAll(".addCont");
-// const amount = document.querySelectorAll(".amount");
-// const imgCont = document.querySelectorAll(".imgCont");
-// const decrement = document.querySelectorAll(".decimg");
-// const increment = document.querySelectorAll(".incimg");
-// const foodCont = document.querySelectorAll(".foodCont");
-// const empty = document.querySelector(".empty");
-// const order = document.querySelector(".order");
-// let cartnum = document.querySelector(".cartnum");
-// let confirmbtn = document.querySelector(".confirm");
-
-// //display plus and minus btn when add to cart is  clicked
-// cartCont.forEach(function (cart, i) {
-//   cart.addEventListener("click", function () {
-//     cart.classList.add("hide");
-
-//     addCont[i].classList.remove("hide");
-
-//     console.log("cart");
-//     imgCont[i].style.border = "1px solid red";
-//   });
-// });
-
-// //remove plus and minus btn when img  is  clicked
-
-// imgCont.forEach(function (add, i) {
-//   add.addEventListener("click", function () {
-//     addCont[i].classList.add("hide");
-
-//     cartCont[i].classList.remove("hide");
-//   });
-// });
-
-// let sum = new Array(9).fill(0);
-
-// let times = 0;
-
-// let cartTotalNum = 0;
-// increment.forEach(function (plus, i) {
-//   plus.addEventListener("click", function () {
-//     sum[i]++;
-
-//     amount[i].textContent = sum[i];
-
-//     confirmbtn.classList.remove("hide");
-
-//     empty.classList.add("hide");
-
-//     const list = document.createElement("div");
-//     list.classList.add("list");
-
-//     const left = document.createElement("div");
-//     left.classList.add("left");
-//     list.prepend(left);
-
-//     const cartFoodName = document.createElement("h5");
-//     cartFoodName.classList.add("cartFoodName");
-//     left.append(cartFoodName);
-
-//     const lower = document.createElement("div");
-//     lower.classList.add("lower");
-//     left.append(lower);
-
-//     const cartTotal = document.createElement("p");
-//     cartTotal.classList.add("cartTotal");
-//     lower.prepend(cartTotal);
-
-//     const cartPrice = document.createElement("p");
-//     cartPrice.classList.add("cartPrice");
-//     lower.prepend(cartPrice);
-
-//     const number = document.createElement("p");
-//     number.classList.add("number");
-//     lower.prepend(number);
-
-//     const removeImg = document.createElement("div");
-//     removeImg.classList.add("removeImg");
-//     list.append(removeImg);
-
-//     order.append(list);
-
-//     removeImg.addEventListener("click", function () {
-//       console.log("clik");
-//       list.style.display = "none";
-
-//       sum[i]--;
-//     });
-
-//     const foodcategory =
-//       this.closest(".foodCont").querySelector("h5").textContent;
-
-//     const rate = this.closest(".foodCont").querySelector("span").textContent;
-
-//     if (foodcategory === cartFoodName.textContent) {
-//       console.log("yes");
-//     } else {
-//       cartFoodName.textContent = foodcategory;
-//       console.log("no");
-//     }
-//     cartPrice.textContent = rate;
-
-//     let cartPlus = cartTotalNum++;
-
-//     cartnum.textContent = cartPlus;
-//     console.log(cartnum.textContent, cartTotalNum);
-
-//   });
-// });
-// {
-// }
-// decrement.forEach(function (minus, i) {
-//   minus.addEventListener("click", function () {
-//     sum[i]--;
-
-//     if (sum[i] < 0) {
-//       sum[i] = 0;
-//     }
-//     amount[i].textContent = sum[i];
-
-//     cartnum.textContent = cartTotalNum--;
-
-//     console.log(cartnum.textContent, cartTotalNum);
-//   });
-// });
-
-// const foods = document.querySelectorAll("h6");
-// const foodTitles = document.querySelectorAll("h5");
-// const price = document.querySelectorAll("span");
-// const foodImg = document.querySelectorAll(".imgCont");
-
-// foodImg.forEach(function (img) {});
-
 const container = document.querySelector(".container");
 const cont1 = document.querySelector(".cont1");
 const cartlist = document.querySelector(".cartlist");
@@ -145,7 +12,7 @@ let prodList = [];
 
 let carts = [];
 
-let sum = 1;
+let sum = 0;
 
 function inner() {
   cont1.innerHTML = "";
@@ -176,20 +43,14 @@ function inner() {
               </div>
               <div class="addCont hide" ">
                 <div class="decimg">
-                  <img
-                    class="decrement"
-                    src="${prod.decr}"
-                    alt=""
-                  />
+                <svg class="decrement" xmlns="http://www.w3.org/2000/svg" width="10" height="2" fill="none" viewBox="0 0 10 2"><path  d="M0 .375h10v1.25H0V.375Z"/></svg>
+                 
                 </div>
 
                 <p class="amount">${sum}</p>
                 <div class="incimg">
-                  <img
-                    class="increment"
-                    src="${prod.incr}"
-                    alt=""
-                  />
+                <svg class="increment xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10"><path  d="M10 4.375H5.625V0h-1.25v4.375H0v1.25h4.375V10h1.25V5.625H10v-1.25Z"/></svg>
+                  
                 </div>
               </div>
             </div>
@@ -232,11 +93,47 @@ function inner() {
         }
 
         if (positionClick.classList.contains("incimg")) {
-          let productId = positionClick.parentElement.dataset.id;
+          // let productId = positionClick.parentElement.dataset.id;
+
+          let productId = addCont[i].dataset.id;
 
           addtocart(productId);
           addCartToHtml();
           empty.classList.add("hide");
+
+          // Find the amount element for this specific item
+          let amountElem = addCont[i].querySelector(".amount");
+          let currentVal = parseInt(amountElem.textContent);
+          amountElem.textContent = currentVal + 1;
+        }
+
+        if (positionClick.classList.contains("decimg")) {
+          // let productId = positionClick.parentElement.dataset.id;
+
+          console.log("dec");
+          let productId = addCont[i].dataset.id;
+
+          removeFromCart(productId);
+          addCartToHtml();
+
+          // Find the amount element for this specific item
+          let amountElem = addCont[i].querySelector(".amount");
+          let currentVal = parseInt(amountElem.textContent);
+          amountElem.textContent = currentVal - 1;
+
+          if (currentVal > 1) {
+            amountElem.textContent = currentVal - 1;
+          } else {
+            amountElem.textContent = 0;
+            cartCont[i].classList.remove("hide");
+            addCont[i].classList.add("hide");
+            foodImg.classList.remove("border");
+          }
+
+          // Hide "empty" message only if something is in the cart
+          if (carts.length === 0) {
+            empty.classList.remove("hide");
+          }
         }
       });
     });
@@ -296,13 +193,39 @@ function addCartToHtml() {
               <p class="cartTotal">@ ${info.price * cart.quantity}</p>
             </div>
           </div>
-          <div class="removeImg">
-            <img src="./assets/images/icon-remove-item.svg" alt="" />
+          <div class="removeImg ">
+            <img  class="delete-btn" data-id="${
+              info.id
+            }" src="./assets/images/icon-remove-item.svg" alt="" />
           </div>
         `;
 
       cartlist.appendChild(newList);
       cartnum.textContent = totalQty;
+
+      const deleteBtn = newList.querySelector(".delete-btn");
+
+      deleteBtn.addEventListener("click", function () {
+        const productId = this.dataset.id;
+
+        // Remove from cart array
+        carts = carts.filter((item) => item.productId !== productId);
+
+        // Update local storage
+        addToMemory();
+
+        // Re-render cart UI
+        addCartToHtml();
+
+        // Optionally show empty message
+        if (carts.length === 0) {
+          empty.classList.remove("hide");
+        }
+
+        // Re-render quantity number
+        let totalQty = carts.reduce((sum, item) => sum + item.quantity, 0);
+        cartnum.textContent = totalQty;
+      });
 
       // console.log(carts);
     });
@@ -324,7 +247,125 @@ function api() {
       if (localStorage.getItem("cart")) {
         empty.classList.add("hide");
       }
-      // localStorage.clear();
+      localStorage.clear();
+      localStorage.removeItem(carts);
     });
 }
 api();
+
+function removeFromCart(productId) {
+  let positionInCart = carts.findIndex((item) => item.productId === productId);
+
+  if (positionInCart >= 0) {
+    carts[positionInCart].quantity--;
+
+    if (carts[positionInCart].quantity <= 0) {
+      carts.splice(positionInCart, 1); // Remove from cart
+    }
+
+    addToMemory(); // Update localStorage
+  }
+}
+
+const confirmBtn = document.querySelector("#confirm");
+const confirmationContainer = document.querySelector(".confirmationContainer");
+
+confirmBtn.addEventListener("click", function () {
+  console.log("cl");
+  confirmationContainer.classList.remove("hide");
+
+  displayConfirmation();
+});
+
+confirmationContainer.addEventListener("click", function () {
+  console.log("cl");
+  confirmationContainer.classList.add("hide");
+});
+
+function displayConfirmation() {
+  let innerItems = "";
+  let orderTotal = 0;
+
+  carts.forEach((cart) => {
+    const product = prodList.find((item) => item.id == cart.productId);
+
+    if (product) {
+      const itemTotal = product.price * cart.quantity;
+      orderTotal += itemTotal;
+
+      innerItems += `
+          <div class="innerConfirmLIst">
+            <div class="thumb">
+              <img src="${product.image.mobile}" alt="${product.name}" />
+            </div>
+            <div class="left">
+              <h5 class="cartFoodName">${product.name}</h5>
+              <div class="lower">
+                <p class="number">$${cart.quantity}x</p>
+                <p class="cartPrice">@ $${product.price}</p>
+              </div>
+            </div>
+            <p class="cartTotal">@ $${itemTotal.toFixed(2)}</p>
+          </div>
+        `;
+    }
+  });
+
+  confirmationContainer.innerHTML = `
+      <div class="confirmation">
+        <img
+          class="conIcon"
+          src="./assets/images/icon-order-confirmed.svg"
+          alt=""
+        />
+        <h2 class="conIcon">Order Confirmed</h2>
+        <p class="conIcon">We hope you enjoy your food</p>
+  
+        <div class="confirmList">
+          ${innerItems}
+          <span class="totalCont">
+            <p>Order Total</p>
+            <h1>$${orderTotal.toFixed(2)}</h1>
+          </span>
+        </div>
+  
+        <button class="newOrder">Start New Order</button>
+      </div>
+    `;
+}
+
+// confirmBtn.addEventListener("click", function () {
+//   confirmationContainer.innerHTML = `<div class="confirmation">
+//       <img
+//         class="conIcon"
+//         src="./assets/images/icon-order-confirmed.svg"
+//         alt=""
+//       />
+
+//       <h2 class="conIcon">Order Confirmed</h2>
+//       <p class="conIcon">We hope you enjoy your food</p>
+
+//       <div class="confirmList">
+//         <div class="innerConfirmLIst">
+//           <div class="thumb">
+//             <img src="./assets/images/image-baklava-thumbnail.jpg" alt="" />
+//           </div>
+//           <div class="left">
+//             <h5 class="cartFoodName">Classic Tiramisu</h5>
+//             <div class="lower">
+//               <p class="number">$1x</p>
+//               <p class="cartPrice">@ $6.50</p>
+//             </div>
+//           </div>
+//           <p class="cartTotal">@ $5.50</p>
+//         </div>
+
+//         <span class="totalCont">
+//           <p>Order Total</p>
+//           <h1>$</h1>
+//         </span>
+//       </div>
+
+//       <button class="newOrder">Start New Order</button>
+//     </div>`;
+// });

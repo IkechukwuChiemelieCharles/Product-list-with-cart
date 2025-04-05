@@ -75,38 +75,50 @@
           <p>Your added items will appear here</p>
         </div>
         <div class="cartlist"></div>
-        <button class="confirm">Confirm Order</button>
+        <button class="confirm" id="confirm">Confirm Order</button>
       </div>
     </div>
+
+    <div class="confirmationContainer hide">
+      <div class="confirmation">
+        <img
+          class="conIcon"
+          src="./assets/images/icon-order-confirmed.svg"
+          alt=""
+        />
+
+        <h2 class="conIcon">Order Confirmed</h2>
+        <p class="conIcon">We hope you enjoy your food</p>
+
+        <div class="confirmList">
+          <div class="innerConfirmLIst">
+            <div class="thumb">
+              <img src="./assets/images/image-baklava-thumbnail.jpg" alt="" />
+            </div>
+            <div class="left">
+              <h5 class="cartFoodName">Classic Tiramisu</h5>
+              <div class="lower">
+                <p class="number">$1x</p>
+                <p class="cartPrice">@ $6.50</p>
+              </div>
+            </div>
+            <p class="cartTotal">@ $5.50</p>
+          </div>
+
+          <span class="totalCont">
+            <p>Order Total</p>
+            <h1>$</h1>
+          </span>
+        </div>
+
+        <button class="newOrder">Start New Order</button>
+      </div>
+    </div>
+
     <div class="attribution">
       Challenge by
       <a href="https://www.frontendmentor.io?ref=challenge">Frontend Mentor</a>.
       Coded by <a href="#">Charlie X </a>.
-    </div>
-
-    <div class="confirmation">
-      <img
-        class="conIcon"
-        src="./assets/images/icon-order-confirmed.svg"
-        alt=""
-      />
-
-      <h2 class="conIcon">Order Confirmed</h2>
-      <p class="conIcon">We hope you enjoy your food</p>
-
-      <!-- <div class="confirmList">
-        <div class="thumb">
-          <img src="./assets/images/image-baklava-thumbnail.jpg" alt="" />
-        </div>
-        <div class="left">
-          <h5 class="cartFoodName">Classic Tiramisu</h5>
-          <div class="lower">
-            <p class="number">$1x</p>
-            <p class="cartPrice">@ $6.50</p>
-            <p class="cartTotal">@ $5.50</p>
-          </div>
-        </div>
-      </div> -->
     </div>
 
     <!-- <div class="column">
@@ -120,3 +132,5 @@
     <script src="./data.js"></script>
   </body>
 </html>
+
+<!--  -->
