@@ -60,8 +60,10 @@ function inner() {
 
             <div class="Priceconts">
               <p>$</p>
-              <span>${prod.price} </span>
-            </div>
+              <span> ${prod.price}
+            
+         </span>
+         </div>
           `;
       foodCont.prepend(foodImg);
       // console.log(foodCont);
@@ -105,6 +107,8 @@ function inner() {
           let amountElem = addCont[i].querySelector(".amount");
           let currentVal = parseInt(amountElem.textContent);
           amountElem.textContent = currentVal + 1;
+
+          localStorage.setItem(`quantity-${productId}`, currentQuantity);
         }
 
         if (positionClick.classList.contains("decimg")) {
@@ -134,6 +138,7 @@ function inner() {
           if (carts.length === 0) {
             empty.classList.remove("hide");
           }
+          localStorage.setItem(`quantity-${productId}`, currentQuantity);
         }
       });
     });
@@ -268,18 +273,30 @@ function removeFromCart(productId) {
 }
 
 const confirmBtn = document.querySelector("#confirm");
+const newOrder = document.querySelector(".newOrder");
+console.log(newOrder);
 const confirmationContainer = document.querySelector(".confirmationContainer");
 
 confirmBtn.addEventListener("click", function () {
   console.log("cl");
-  confirmationContainer.classList.remove("hide");
+
+  // if (carts.length !== 0) {
+  // }
+  confirmationContainer.classList.add("open");
+  confirmationContainer.classList.remove("close");
 
   displayConfirmation();
 });
 
+// newOrder.addEventListener("click", function () {
+//   console.log("hi");
+//   // confirmationContainer.classList.add("close");
+// });
 confirmationContainer.addEventListener("click", function () {
-  console.log("cl");
-  confirmationContainer.classList.add("hide");
+  console.log("clicked");
+  confirmationContainer.classList.remove("open");
+
+  confirmationContainer.classList.add("close");
 });
 
 function displayConfirmation() {
