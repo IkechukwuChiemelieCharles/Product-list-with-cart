@@ -20,6 +20,10 @@ function inner() {
   if (prodList.length > 0) {
     //looped over prodlist array
     prodList.forEach((prod, i) => {
+      let productId = prod.id;
+      let productInCart = carts.find((item) => item.productId === productId);
+      let quantity = productInCart ? productInCart.quantity : 0;
+
       //created a div with name foodCont
       const foodCont = document.createElement("div");
 
@@ -47,7 +51,7 @@ function inner() {
                  
                 </div>
 
-                <p class="amount">${sum}</p>
+                <p class="amount">${quantity}</p>
                 <div class="incimg">
                 <svg class="increment xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="none" viewBox="0 0 10 10"><path  d="M10 4.375H5.625V0h-1.25v4.375H0v1.25h4.375V10h1.25V5.625H10v-1.25Z"/></svg>
                   
@@ -60,9 +64,8 @@ function inner() {
 
             <div class="Priceconts">
               <p>$</p>
-              <span> ${prod.price}
-            
-         </span>
+            <span>$${parseFloat(prod.price).toFixed(2)}</span>
+
          </div>
           `;
       foodCont.prepend(foodImg);
@@ -103,12 +106,13 @@ function inner() {
           addCartToHtml();
           empty.classList.add("hide");
 
-          // Find the amount element for this specific item
+          let productInCart = carts.find(
+            (item) => item.productId === productId
+          );
           let amountElem = addCont[i].querySelector(".amount");
-          let currentVal = parseInt(amountElem.textContent);
-          amountElem.textContent = currentVal + 1;
+          amountElem.textContent = productInCart.quantity;
 
-          localStorage.setItem(`quantity-${productId}`, currentQuantity);
+          localStorage.setItem(`quantity-${productId}`, amountElem.textContent);
         }
 
         if (positionClick.classList.contains("decimg")) {
@@ -138,7 +142,7 @@ function inner() {
           if (carts.length === 0) {
             empty.classList.remove("hide");
           }
-          localStorage.setItem(`quantity-${productId}`, currentQuantity);
+          localStorage.setItem(`quantity-${productId}`, amountElem.textContent);
         }
       });
     });
@@ -252,8 +256,8 @@ function api() {
       if (localStorage.getItem("cart")) {
         empty.classList.add("hide");
       }
-      localStorage.clear();
-      localStorage.removeItem(carts);
+      // localStorage.clear();
+      // localStorage.removeItem(carts);
     });
 }
 api();
@@ -318,7 +322,7 @@ function displayConfirmation() {
             <div class="left">
               <h5 class="cartFoodName">${product.name}</h5>
               <div class="lower">
-                <p class="number">$${cart.quantity}x</p>
+                <p class="number">${cart.quantity}x</p>
                 <p class="cartPrice">@ $${product.price}</p>
               </div>
             </div>
@@ -350,39 +354,3 @@ function displayConfirmation() {
       </div>
     `;
 }
-
-// confirmBtn.addEventListener("click", function () {
-//   confirmationContainer.innerHTML = `<div class="confirmation">
-//       <img
-//         class="conIcon"
-//         src="./assets/images/icon-order-confirmed.svg"
-//         alt=""
-//       />
-
-//       <h2 class="conIcon">Order Confirmed</h2>
-//       <p class="conIcon">We hope you enjoy your food</p>
-
-//       <div class="confirmList">
-//         <div class="innerConfirmLIst">
-//           <div class="thumb">
-//             <img src="./assets/images/image-baklava-thumbnail.jpg" alt="" />
-//           </div>
-//           <div class="left">
-//             <h5 class="cartFoodName">Classic Tiramisu</h5>
-//             <div class="lower">
-//               <p class="number">$1x</p>
-//               <p class="cartPrice">@ $6.50</p>
-//             </div>
-//           </div>
-//           <p class="cartTotal">@ $5.50</p>
-//         </div>
-
-//         <span class="totalCont">
-//           <p>Order Total</p>
-//           <h1>$</h1>
-//         </span>
-//       </div>
-
-//       <button class="newOrder">Start New Order</button>
-//     </div>`;
-// });

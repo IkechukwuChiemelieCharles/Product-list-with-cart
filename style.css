@@ -26,6 +26,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  gap: 2rem;
 }
 
 .container {
@@ -220,6 +221,7 @@ h1 {
 .number {
   font-size: 1.2rem;
   color: var(--Red) !important;
+  font-weight: bold;
 }
 .cartPrice {
   font-size: 1.2rem;
@@ -252,6 +254,7 @@ h1 {
   height: 4rem;
   border-radius: 5rem;
   color: var(--Rose100);
+  cursor: pointer;
 }
 .hide {
   display: none !important;
@@ -347,8 +350,13 @@ h1 {
 }
 .conIcon {
   align-self: flex-start;
+  font-size: 4rem;
 }
-
+.conIcon2 {
+  align-self: flex-start;
+  font-size: 1.2rem;
+  color: var(red);
+}
 .newOrder {
   background-color: var(--Red);
   border: none;
@@ -420,6 +428,7 @@ h1 {
   .confirmation {
     width: 40rem;
     border-radius: 2rem;
+    cursor: pointer;
   }
 }
 @media screen and (min-width: 1024px) {
